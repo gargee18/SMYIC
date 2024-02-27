@@ -24,7 +24,7 @@ import volume_utils
 
 
 #Change this to view another specimen
-current_specimen="cep_368B"
+current_specimen="cep_313B"
 
 #Change this according to your local configuration of data storage
 custom_user_path_to_registered_data="/home/phukon/Desktop/registration/"
@@ -53,6 +53,7 @@ newdiff_2022_2023=np.maximum(0, matref-matmov)
 newdiffvol_2022_2023=Volume(newdiff_2022_2023)
 volume_utils.set_spacing_from_tiff_to_volume(ref_input_path,newdiffvol_2022_2023)
 
+
 #Some kind of verification ?
 assert np.sum(np.abs(newdiff_2022_2023-newdiff_2023_2022)) != 0 , "Images are zero, or images are identical. Critical fail!"
 
@@ -70,12 +71,13 @@ silhouette = vol_ref.isosurface(threshold)
 newdiffvol_2022_2023 = newdiffvol_2022_2023.isosurface(threshold_22)
 newdiffvol_2023_2022 = newdiffvol_2023_2022.isosurface(threshold_23)
 # Display using "plotter"
+
 plt = Plotter(axes=1,N=1)
 plt.at(0).show("bla",silhouette.color('white'), bg='black', axes = 0)
 plt.at(0).show("dd", newdiffvol_2022_2023.color('red'), bg='black', axes = 0)
 plt.at(0).show("dd", newdiffvol_2023_2022.color('green'), bg='black', axes = 0)
 # Setting custom properties(Specular, Diffuse, Ambient, Opacity) 
-
+print('its ok')
 
 def update_property(widget, event, property_setter):
     value = widget.GetRepresentation().GetValue()
